@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FEBerbisnis — We Connect, Learn and Grow together.</title>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- jsPDF & AutoTable CDN for Direct PDF Download -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+  <!-- Tailwind Design System Configuration -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream: '#FEF6EB',
+            charcoal: '#343333',
+            magenta: '#E5006E',
+            yellowbrand: '#FFCE13',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          boxShadow: {
+            swiss: '0 12px 32px -12px rgba(52, 51, 51, 0.10)',
+            'magenta-glow': '0 0 0 3px rgba(229, 0, 110, 0.16), 0 12px 28px -8px rgba(229, 0, 110, 0.22)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-cream text-charcoal selection:bg-magenta selection:text-white">
+
+  <!-- =========================================================================
+       STICKY SWISS EDITORIAL HEADER
+       ========================================================================= -->
+  <header class="sticky top-0 z-40 bg-cream/90 backdrop-blur-md hairline-b">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-18 py-3.5">
+        <!-- Brand Logo Image (assets/img/brand/feberbisnis.png) -->
+        <button
+          type="button"
+          onclick="switchTab('home')"
+          class="flex items-center focus:outline-none group"
+          aria-label="Kembali ke Home FEBerbisnis"
+        >
+          <span class="inline-flex items-center h-9 sm:h-10">
+            <img
+              src="assets/img/brand/feberbisnis.png"
+              alt="Logo FEBerbisnis"
+              class="h-9 sm:h-10 w-auto object-contain"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            />
+            <!-- Placeholder SVG shown ONLY if assets/img/brand/feberbisnis.png is missing -->
+            <svg style="display:none;" viewBox="0 0 186 44" class="h-9 sm:h-10 w-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo FEBerbisnis">
+              <rect x="1" y="1" width="184" height="42" rx="10" fill="#FFFBF5" stroke="#343333" stroke-opacity="0.16" stroke-width="1.2" />
+              <circle cx="22" cy="22" r="7" fill="#E5006E" />
+              <circle cx="33" cy="22" r="5" fill="#FFCE13" fill-opacity="0.92" />
+              <text x="48" y="28" fill="#343333" font-family="Plus Jakarta Sans, sans-serif" font-size="19" font-weight="800" letter-spacing="-0.6">
+                FEB<tspan fill="#E5006E">erbisnis</tspan>
+              </text>
+            </svg>
+          </span>
+        </button>
+
+        <!-- Desktop Navigation Tabs (5 Tabs) -->
+        <nav class="hidden md:flex items-center gap-1" aria-label="Navigasi Utama">
+          <button
+            type="button"
+            data-nav-tab="home"
+            onclick="switchTab('home')"
+            class="nav-tab-btn px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200"
+          >
+            Home
+          </button>
+          <button
+            type="button"
+            data-nav-tab="programs"
+            onclick="switchTab('programs')"
+            class="nav-tab-btn px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200"
+          >
+            Program &amp; Events
+          </button>
+          <button
+            type="button"
+            data-nav-tab="community"
+            onclick="switchTab('community')"
+            class="nav-tab-btn px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200"
+          >
+            Community Hub
+          </button>
+          <button
+            type="button"
+            data-nav-tab="shop"
+            onclick="switchTab('shop')"
+            class="nav-tab-btn px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200"
+          >
+            Shop
+          </button>
+          <button
+            type="button"
+            data-nav-tab="playground"
+            onclick="switchTab('playground')"
+            class="nav-tab-btn px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 inline-flex items-center gap-2"
+          >
+            <span>Playground</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-magenta text-white">
+              Tools
+            </span>
+          </button>
+        </nav>
+
+        <!-- Mobile Menu Toggle -->
+        <button
+          type="button"
+          id="mobile-menu-btn"
+          onclick="toggleMobileMenu()"
+          class="md:hidden p-2.5 rounded-xl hairline-border text-charcoal hover:bg-charcoal hover:text-cream transition-colors"
+          aria-label="Buka Menu Navigasi"
+          aria-expanded="false"
+        >
+          <svg id="hamburger-icon" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+          <svg id="close-menu-icon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden hairline-t bg-cream px-4 pt-3 pb-5 space-y-1.5 shadow-swiss">
+      <button
+        type="button"
+        data-nav-tab-mobile="home"
+        onclick="switchTab('home'); toggleMobileMenu(false)"
+        class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-colors"
+      >
+        Home
+      </button>
+      <button
+        type="button"
+        data-nav-tab-mobile="programs"
+        onclick="switchTab('programs'); toggleMobileMenu(false)"
+        class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-colors"
+      >
+        Program &amp; Events
+      </button>
+      <button
+        type="button"
+        data-nav-tab-mobile="community"
+        onclick="switchTab('community'); toggleMobileMenu(false)"
+        class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-colors"
+      >
+        Community Hub
+      </button>
+      <button
+        type="button"
+        data-nav-tab-mobile="shop"
+        onclick="switchTab('shop'); toggleMobileMenu(false)"
+        class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-colors"
+      >
+        Shop
+      </button>
+      <button
+        type="button"
+        data-nav-tab-mobile="playground"
+        onclick="switchTab('playground'); toggleMobileMenu(false)"
+        class="w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-colors flex items-center justify-between"
+      >
+        <span>Playground</span>
+        <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-magenta text-white">
+          Tools
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       MAIN APPLICATION CONTAINER
+       ========================================================================= -->
+  <main class="min-h-screen">
+
+    <!-- =======================================================================
+         TAB 1: HOME / ABOUT US
+         ======================================================================= -->
+    <section id="view-home" class="tab-view animate-fade-up">
+
+      <!-- 1. HERO SECTION -->
+      <div class="relative overflow-hidden hairline-b swiss-grid-bg">
+        <!-- Ambient Gradient Accent -->
+        <div class="ambient-orb-hero absolute -top-24 right-0 w-[420px] h-[420px] sm:w-[560px] sm:h-[560px] rounded-full"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-16 sm:pt-20 sm:pb-24 relative z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+            <!-- Hero Typography Column -->
+            <div class="lg:col-span-7">
+              <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-[64px] font-extrabold tracking-[-0.03em] leading-[1.06] text-charcoal">
+                We Connect,
+                <span class="text-brand-gradient block sm:inline">Learn and Grow together.</span>
+              </h1>
+
+              <p class="mt-6 text-base sm:text-lg text-charcoal/75 max-w-2xl leading-relaxed font-normal">
+                Wadah pengembangan minat kewirausahaan di lingkup Fakultas Ekonomika dan Bisnis—menghadirkan ruang jejaring, pembelajaran terstruktur, dan sinergi nyata bagi generasi muda pegiat bisnis.
+              </p>
+
+              <!-- Hero CTAs -->
+              <div class="mt-8 flex flex-wrap items-center gap-3.5">
+                <a
+                  href="#about"
+                  class="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-charcoal text-cream text-sm font-semibold hover:bg-magenta transition-colors duration-200 shadow-swiss"
+                >
+                  Eksplorasi Profil
+                </a>
+                <button
+                  type="button"
+                  onclick="switchTab('programs')"
+                  class="inline-flex items-center justify-center px-6 py-3.5 rounded-full bg-white/80 hover:bg-white text-charcoal text-sm font-semibold hairline-border transition-all duration-200"
+                >
+                  Lihat Program &amp; Events
+                </button>
+              </div>
+            </div>
+
+            <!-- Hero Interactive Photo Carousel Column -->
+            <div class="lg:col-span-5">
+              <div
+                id="hero-carousel"
+                class="relative rounded-3xl overflow-hidden border-[1.5px] border-charcoal bg-cream shadow-swiss select-none group"
+              >
+                <!-- 4:3 Slides Track -->
+                <div class="aspect-[4/3] w-full overflow-hidden relative bg-charcoal">
+                  <div
+                    id="hero-carousel-track"
+                    class="flex h-full w-full transition-transform duration-500 ease-out"
+                  >
+                    <!-- Slides rendered dynamically by renderHeroCarousel() -->
+                  </div>
+                </div>
+
+                <!-- Floating Left Arrow Button -->
+                <button
+                  type="button"
+                  onclick="prevHeroSlide()"
+                  aria-label="Foto Sebelumnya"
+                  class="absolute left-3.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-cream/90 hover:bg-magenta text-charcoal hover:text-white border border-charcoal/20 hover:border-magenta shadow-md flex items-center justify-center transition-all duration-200 focus:outline-none"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+
+                <!-- Floating Right Arrow Button -->
+                <button
+                  type="button"
+                  onclick="nextHeroSlide()"
+                  aria-label="Foto Berikutnya"
+                  class="absolute right-3.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-cream/90 hover:bg-magenta text-charcoal hover:text-white border border-charcoal/20 hover:border-magenta shadow-md flex items-center justify-center transition-all duration-200 focus:outline-none"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+
+                <!-- Bottom Pagination Dots -->
+                <div
+                  id="hero-carousel-dots"
+                  class="absolute bottom-3.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-charcoal/65 backdrop-blur-xs"
+                  role="tablist"
+                  aria-label="Indikator Slide Hero"
+                >
+                  <!-- Dots rendered dynamically by JS -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. ABOUT US & WHY WE EXIST -->
+      <div id="about" class="hairline-b scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-charcoal/15">
+            <!-- ABOUT US -->
+            <div class="py-14 sm:py-16 md:pr-12 lg:pr-16">
+              <div class="mb-6">
+                <span class="text-xs font-bold uppercase tracking-[0.16em] text-magenta">
+                  ABOUT US
+                </span>
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal mb-5">
+                Tentang FEBerbisnis
+              </h2>
+              <p class="text-base sm:text-lg leading-relaxed text-charcoal/80">
+                FEBerbisnis adalah organisasi yang berfokus pada pengembangan minat kewirausahaan di lingkup FEB untuk menjadi pusat jejaring, inspirasi, dan sinergi bagi para pegiat dan peminat bisnis.
+              </p>
+            </div>
+
+            <!-- WHY WE EXIST -->
+            <div class="py-14 sm:py-16 md:pl-12 lg:pl-16">
+              <div class="mb-6">
+                <span class="text-xs font-bold uppercase tracking-[0.16em] text-charcoal/65">
+                  WHY WE EXIST
+                </span>
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal mb-5">
+                Mengapa Kami Hadir
+              </h2>
+              <p class="text-base sm:text-lg leading-relaxed text-charcoal/80">
+                FEBerbisnis hadir untuk menjawab kebutuhan dan keinginan mahasiswa yang memiliki minat dalam kewirausahaan dengan menyediakan wadah untuk belajar dan berkembang.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.5 ECOSYSTEM & PARTNERS FULL-WIDTH LOGO MARQUEE -->
+      <div class="bg-white py-10 sm:py-12 hairline-b overflow-hidden">
+        <!-- Aligned Header Row: Title Left, Become a Partner Right -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 flex items-center justify-between gap-4">
+          <span class="text-xs font-bold uppercase tracking-[0.16em] text-magenta">
+            ECOSYSTEM &amp; PARTNERS
+          </span>
+          <button
+            type="button"
+            onclick="openPartnerModal()"
+            class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-magenta hover:text-charcoal transition-colors duration-200 focus:outline-none"
+          >
+            <span>Become a Partner</span>
+            <span aria-hidden="true">&rarr;</span>
+          </button>
+        </div>
+
+        <!-- Edge-to-Edge Seamless Right-to-Left Running Logo Viewport -->
+        <div class="ecosystem-marquee-viewport relative w-full overflow-hidden py-2">
+          <!-- Soft White Edge Fade-Out Masks -->
+          <div class="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-24 bg-gradient-to-r from-white via-white/85 to-transparent z-10"></div>
+          <div class="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-24 bg-gradient-to-l from-white via-white/85 to-transparent z-10"></div>
+
+          <!-- Duplicated Track Rendered Dynamically by JS -->
+          <div id="ecosystem-marquee-track" class="ecosystem-marquee-track items-center">
+            <!-- Populated by renderEcosystemMarquee() -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. VISION & MISSION (DARK EDITORIAL BAND) -->
+      <div class="bg-charcoal text-cream relative overflow-hidden py-18 sm:py-24">
+        <!-- Subtle Radial Gradient Glows -->
+        <div class="ambient-orb-dark-1 absolute -top-24 -left-24 w-96 h-96 rounded-full"></div>
+        <div class="ambient-orb-dark-2 absolute -bottom-24 -right-24 w-96 h-96 rounded-full"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <!-- Vision Block -->
+          <div class="pb-12 sm:pb-16 border-b border-cream/15">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+              <div class="lg:col-span-4">
+                <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-yellowbrand">
+                  <span class="w-2 h-2 rounded-full bg-yellowbrand"></span>
+                  VISION
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-cream mt-3">
+                  Arah &amp; Visi Kami
+                </h2>
+              </div>
+              <div class="lg:col-span-8">
+                <blockquote class="text-2xl sm:text-3xl lg:text-[34px] font-bold leading-snug tracking-tight text-cream">
+                  &ldquo;FEBerbisnis sebagai fondasi ruang tumbuh berkelanjutan yang menghadirkan arah kewirausahaan yang progresif dan harmonis.&rdquo;
+                </blockquote>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mission Block -->
+          <div class="pt-12 sm:pt-16">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+              <div>
+                <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-magenta">
+                  <span class="w-2 h-2 rounded-full bg-magenta"></span>
+                  MISSION
+                </span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-cream mt-2.5">
+                  Empat Pilar Misi
+                </h3>
+              </div>
+              <p class="text-sm text-cream/65 max-w-md">
+                Langkah strategis yang kami jalankan secara konsisten untuk mendukung pertumbuhan pengurus dan member.
+              </p>
+            </div>
+
+            <!-- 4 Mission Cards rendered from SITE_DATA -->
+            <div id="mission-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. CORE VALUES (4-CARD SWISS GRID) -->
+      <div class="py-16 sm:py-24 hairline-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="mb-12">
+            <span class="text-xs font-bold uppercase tracking-[0.16em] text-magenta block mb-2.5">
+              CORE VALUES
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-charcoal">
+              Nilai Inti Organisasi
+            </h2>
+          </div>
+
+          <!-- 4 Core Value Cards rendered from SITE_DATA -->
+          <div id="values-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+        </div>
+      </div>
+
+      <!-- 5. DIVISI & ORGANOGRAM KEPENGURUSAN (PERIODE 2026 & 2025) -->
+      <div id="organogram" class="py-16 sm:py-24 bg-white/40 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="mb-10">
+            <span class="text-xs font-bold uppercase tracking-[0.16em] text-magenta block mb-2.5">
+              STRUCTURE &amp; PEOPLE
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-charcoal">
+              Divisi &amp; Organogram Kepengurusan
+            </h2>
+
+            <!-- Clean Segmented Pill Period Switcher -->
+            <div
+              class="mt-6 inline-flex items-center p-1.5 rounded-full bg-cream hairline-border shadow-xs"
+              role="tablist"
+              aria-label="Pilih Periode Kepengurusan"
+            >
+              <button
+                type="button"
+                id="period-btn-2026"
+                onclick="switchOrgPeriod('2026')"
+                role="tab"
+                aria-selected="true"
+                class="px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 bg-charcoal text-cream shadow-xs"
+              >
+                Periode 2026
+              </button>
+              <button
+                type="button"
+                id="period-btn-2025"
+                onclick="switchOrgPeriod('2025')"
+                role="tab"
+                aria-selected="false"
+                class="px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 text-charcoal/75 hover:text-charcoal"
+              >
+                Periode 2025
+              </button>
+            </div>
+          </div>
+
+          <!-- Interactive Tree Chart Container -->
+          <div class="rounded-3xl bg-cream/60 border border-charcoal/10 p-6 md:p-10 shadow-swiss overflow-x-auto custom-scroll">
+            <div id="organogram-tree" class="org-tree-canvas animate-fade-up">
+              <!-- Populated dynamically by renderOrganogram() -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =======================================================================
+         TAB 2: PROGRAM & EVENTS
+         ======================================================================= -->
+    <section id="view-programs" class="tab-view hidden animate-fade-up">
+      <!-- Editorial Header -->
+      <div class="relative overflow-hidden hairline-b swiss-grid-bg">
+        <div class="ambient-orb-hero absolute -top-28 right-10 w-[400px] h-[400px] rounded-full"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 relative z-10">
+          <span class="text-xs font-bold uppercase tracking-[0.16em] text-magenta block mb-3">
+            PROKER, PUBLIKASI &amp; DOKUMENTASI
+          </span>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
+            <div class="lg:col-span-7">
+              <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-charcoal">
+                Program &amp; Events
+              </h1>
+            </div>
+            <div class="lg:col-span-5">
+              <p class="text-base text-charcoal/75 leading-relaxed">
+                Eksplorasi program kerja utama FEBerbisnis beserta catatan publikasi dan arsip dokumentasi kegiatan yang dirancang untuk menumbuhkan kapasitas wirausaha mahasiswa.
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive Filter Pills -->
+          <div id="program-filters" class="mt-9 flex flex-wrap items-center gap-2.5" role="tablist" aria-label="Filter Program">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Programs Editorial Card Grid -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div id="programs-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         TAB 3: COMMUNITY HUB (MEMBER BUSINESSES & INTEREST CONNECT)
+         ======================================================================= -->
+    <section id="view-community" class="tab-view hidden animate-fade-up">
+      <!-- Editorial Header -->
+      <div class="relative overflow-hidden hairline-b swiss-grid-bg">
+        <div class="ambient-orb-hero absolute -top-28 right-10 w-[420px] h-[420px] rounded-full"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 relative z-10">
+          <span class="text-xs font-bold uppercase tracking-[0.16em] text-magenta block mb-3">
+            COMMUNITY HUB
+          </span>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
+            <div class="lg:col-span-7">
+              <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-charcoal leading-[1.08]">
+                Ekosistem Bisnis &amp; <span class="text-brand-gradient">Jejaring Member</span>
+              </h1>
+            </div>
+            <div class="lg:col-span-5">
+              <p class="text-base text-charcoal/75 leading-relaxed">
+                Temukan bisnis yang dirintis anggota FEBerbisnis atau terhubung dengan sesama member yang memiliki minat usaha serupa untuk mulai berkolaborasi.
+              </p>
+            </div>
+          </div>
+
+          <!-- Sub-Tab Switcher: Member Businesses vs Interest Connect -->
+          <div
+            class="mt-9 inline-flex items-center p-1.5 rounded-full bg-cream hairline-border shadow-xs"
+            role="tablist"
+            aria-label="Pilih Direktori Community Hub"
+          >
+            <button
+              type="button"
+              id="community-subtab-businesses"
+              onclick="switchCommunitySubtab('businesses')"
+              role="tab"
+              aria-selected="true"
+              class="px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 bg-charcoal text-cream shadow-xs"
+            >
+              Member Businesses
+            </button>
+            <button
+              type="button"
+              id="community-subtab-interests"
+              onclick="switchCommunitySubtab('interests')"
+              role="tab"
+              aria-selected="false"
+              class="px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 text-charcoal/75 hover:text-charcoal"
+            >
+              Interest Connect
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Community Directory Body -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <!-- SUB-VIEW 1: MEMBER BUSINESSES -->
+        <div id="community-panel-businesses" class="animate-fade-up">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <div id="community-biz-filters" class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter Kategori Bisnis">
+              <!-- Rendered by JS -->
+            </div>
+            <span id="community-biz-count" class="text-xs font-semibold text-charcoal/55">
+              Menampilkan bisnis
+            </span>
+          </div>
+
+          <div id="community-biz-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- SUB-VIEW 2: INTEREST CONNECT (MEMBERS EXPLORING BUSINESS INTERESTS) -->
+        <div id="community-panel-interests" class="hidden animate-fade-up">
+          <div class="p-5 sm:p-6 rounded-2xl bg-white/85 hairline-border mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h2 class="text-base sm:text-lg font-extrabold text-charcoal">
+                Cari Teman Diskusi &amp; Co-Founder dengan Minat Serupa
+              </h2>
+              <p class="text-xs sm:text-sm text-charcoal/70 mt-1">
+                Belum punya bisnis bukan halangan—kenali member lain yang tertarik di bidang yang sama untuk riset dan bertumbuh bersama.
+              </p>
+            </div>
+            <span class="shrink-0 text-[11px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-full bg-yellowbrand/50 text-charcoal">
+              Open for Collaboration
+            </span>
+          </div>
+
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <div id="community-interest-filters" class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter Minat Member">
+              <!-- Rendered by JS -->
+            </div>
+            <span id="community-interest-count" class="text-xs font-semibold text-charcoal/55">
+              Menampilkan member
+            </span>
+          </div>
+
+          <div id="community-interest-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         TAB 4: SHOP (OFFICIAL MERCH FEBERBISNIS & MEMBER'S SHOP)
+         ======================================================================= -->
+    <section id="view-shop" class="tab-view hidden animate-fade-up">
+      <!-- Editorial Header -->
+      <div class="relative overflow-hidden hairline-b swiss-grid-bg">
+        <div class="ambient-orb-hero absolute -top-28 right-10 w-[420px] h-[420px] rounded-full"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 relative z-10">
+          <span class="text-xs font-bold uppercase tracking-[0.16em] text-magenta block mb-3">
+            FEBERBISNIS SHOP
+          </span>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
+            <div class="lg:col-span-7">
+              <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-charcoal leading-[1.08]">
+                Official Merch &amp; <span class="text-brand-gradient">Member&rsquo;s Shop</span>
+              </h1>
+            </div>
+            <div class="lg:col-span-5">
+              <p class="text-base text-charcoal/75 leading-relaxed">
+                Dukung ekosistem kewirausahaan FEB melalui merchandise resmi organisasi serta berbagai produk fisik maupun digital karya anggota FEBerbisnis.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 1: Official Merch FEBerbisnis -->
+      <div class="hairline-b py-14 sm:py-18">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-9">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-[0.16em] text-magenta block mb-2">
+                OFFICIAL MERCHANDISE
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal">
+                Official Merch FEBerbisnis
+              </h2>
+            </div>
+            <p class="text-xs sm:text-sm text-charcoal/65 max-w-md">
+              Klik kartu produk untuk melihat galeri foto &amp; detail ukuran, atau langsung klik tombol Order.
+            </p>
+          </div>
+
+          <div id="shop-merch-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Member's Shop (Produk Fisik & Produk Digital) -->
+      <div class="py-14 sm:py-18 bg-white/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-9">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-[0.16em] text-magenta block mb-2">
+                MEMBER&rsquo;S SHOWCASE
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal">
+                Member&rsquo;s Shop
+              </h2>
+              <p class="text-sm text-charcoal/70 mt-2 max-w-xl">
+                Etalase produk fisik dan produk digital pilihan dari bisnis milik anggota aktif FEBerbisnis.
+              </p>
+            </div>
+
+            <!-- Interactive Filter Buttons: Semua | Produk Fisik | Produk Digital -->
+            <div id="shop-member-filters" class="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter Jenis Produk Member">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+
+          <div id="shop-member-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         TAB 5: PLAYGROUND — MULTI-TOOLS HUB & SIMULATOR KELAYAKAN USAHA & BEP
+         ======================================================================= -->
+    <section id="view-playground" class="tab-view hidden animate-fade-up">
+
+      <!-- =====================================================================
+           4A. PLAYGROUND HUB VIEW (3 TOOL CARDS)
+           ===================================================================== -->
+      <div id="playground-hub-view" class="animate-fade-up">
+        <div class="relative overflow-hidden hairline-b swiss-grid-bg">
+          <div class="ambient-orb-hero absolute -top-28 right-8 w-[420px] h-[420px] rounded-full"></div>
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 relative z-10">
+            <span class="text-xs font-bold uppercase tracking-[0.16em] text-magenta block mb-3">
+              PLAYGROUND
+            </span>
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-charcoal leading-[1.08]">
+              Business <span class="text-brand-gradient">Playground</span>
+            </h1>
+            <p class="mt-4 text-base sm:text-lg text-charcoal/75 max-w-2xl leading-relaxed">
+              Kumpulan tools interaktif dari FEBerbisnis untuk membantu validasi dan operasional bisnismu.
+            </p>
+          </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Card 1 (Active): Simulator Kelayakan & BEP -->
+            <article class="rounded-3xl bg-white/95 border-[1.5px] border-charcoal p-7 shadow-swiss flex flex-col justify-between transition-all duration-200 hover:-translate-y-1">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-6">
+                  <span class="w-11 h-11 rounded-2xl bg-charcoal text-yellowbrand flex items-center justify-center font-extrabold text-sm">
+                    01
+                  </span>
+                  <span class="text-[11px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">
+                    Tersedia
+                  </span>
+                </div>
+                <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight text-charcoal">
+                  Simulator Kelayakan &amp; BEP
+                </h2>
+                <p class="mt-3 text-sm text-charcoal/75 leading-relaxed">
+                  Hitung titik balik modal, tentukan harga jual dari target margin, dan uji skenario promo usahamu.
+                </p>
+              </div>
+              <div class="mt-8 pt-5 hairline-t">
+                <button
+                  type="button"
+                  onclick="openPlaygroundTool('simulator')"
+                  class="w-full py-3 px-5 rounded-full bg-magenta hover:bg-charcoal text-white text-sm font-bold transition-colors duration-200 shadow-swiss"
+                >
+                  Buka Simulator
+                </button>
+              </div>
+            </article>
+
+            <!-- Card 2 (Coming Soon): Invoice Generator -->
+            <article class="rounded-3xl bg-white/55 hairline-border p-7 flex flex-col justify-between opacity-75">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-6">
+                  <span class="w-11 h-11 rounded-2xl bg-charcoal/10 text-charcoal/60 flex items-center justify-center font-extrabold text-sm">
+                    02
+                  </span>
+                  <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-yellowbrand/45 text-charcoal border border-charcoal/15">
+                    Coming Soon
+                  </span>
+                </div>
+                <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight text-charcoal/80">
+                  Invoice Generator
+                </h2>
+                <p class="mt-3 text-sm text-charcoal/65 leading-relaxed">
+                  Buat nota dan invoice penjualan profesional berformat PDF yang siap kirim ke pelanggan.
+                </p>
+              </div>
+              <div class="mt-8 pt-5 hairline-t">
+                <button
+                  type="button"
+                  disabled
+                  class="w-full py-3 px-5 rounded-full bg-charcoal/10 text-charcoal/45 text-sm font-bold cursor-not-allowed"
+                >
+                  Segera Hadir
+                </button>
+              </div>
+            </article>
+
+            <!-- Card 3 (Coming Soon): Business Idea Generator -->
+            <article class="rounded-3xl bg-white/55 hairline-border p-7 flex flex-col justify-between opacity-75">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-6">
+                  <span class="w-11 h-11 rounded-2xl bg-charcoal/10 text-charcoal/60 flex items-center justify-center font-extrabold text-sm">
+                    03
+                  </span>
+                  <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-yellowbrand/45 text-charcoal border border-charcoal/15">
+                    Coming Soon
+                  </span>
+                </div>
+                <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight text-charcoal/80">
+                  Business Idea Generator
+                </h2>
+                <p class="mt-3 text-sm text-charcoal/65 leading-relaxed">
+                  Temukan ide bisnis potensial berdasarkan modal awal, minat, dan kebutuhan pasar kampus.
+                </p>
+              </div>
+              <div class="mt-8 pt-5 hairline-t">
+                <button
+                  type="button"
+                  disabled
+                  class="w-full py-3 px-5 rounded-full bg-charcoal/10 text-charcoal/45 text-sm font-bold cursor-not-allowed"
+                >
+                  Segera Hadir
+                </button>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           4B. SIMULATOR KELAYAKAN USAHA & BEP VIEW
+           ===================================================================== -->
+      <div id="playground-simulator-view" class="hidden animate-fade-up">
+
+        <!-- Print-Only Header for Clean PDF Export -->
+        <div class="print-only-header hidden items-center justify-between pb-4 mb-6 border-b-2 border-charcoal">
+          <div>
+            <p class="text-xs font-extrabold uppercase tracking-widest text-magenta">FEBerbisnis • Business Playground</p>
+            <h1 class="text-2xl font-extrabold text-charcoal mt-1">Ringkasan Simulasi Kelayakan Usaha &amp; BEP</h1>
+          </div>
+          <div class="text-right text-xs text-charcoal/70">
+            <p id="print-timestamp" class="font-semibold"></p>
+            <p>We Connect, Learn and Grow together.</p>
+          </div>
+        </div>
+
+        <!-- Clean Simulator Header (No extra badges/tags) -->
+        <div class="relative overflow-hidden hairline-b swiss-grid-bg no-print">
+          <div class="ambient-orb-hero absolute -top-28 right-6 w-[420px] h-[420px] rounded-full"></div>
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 relative z-10">
+            <button
+              type="button"
+              onclick="openPlaygroundTool('hub')"
+              class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/85 hover:bg-charcoal text-charcoal hover:text-cream text-xs font-bold hairline-border transition-colors duration-200 mb-6"
+            >
+              <span>&larr; Kembali ke Semua Tools</span>
+            </button>
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-charcoal leading-[1.08]">
+              Simulator Kelayakan Usaha &amp; <span class="text-brand-gradient">BEP</span>
+            </h1>
+            <p class="mt-3.5 text-base sm:text-lg text-charcoal/75 max-w-2xl leading-relaxed">
+              Hitung titik balik modal, target jualan harian, dan uji skenario promo bisnismu secara instan.
+            </p>
+          </div>
+        </div>
+
+        <!-- Main 2-Column Interactive Workspace -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+          <div class="playground-layout-grid grid grid-cols-1 lg:grid-cols-12 gap-7 lg:gap-9 items-start">
+
+            <!-- ===============================================================
+                 LEFT COLUMN: QUICK-FILL PRESETS + FORM INPUT A–E (7 COLS)
+                 =============================================================== -->
+            <div class="lg:col-span-7 space-y-6">
+
+              <!-- Quick-Fill Presets -->
+              <div class="rounded-3xl bg-white/85 hairline-border p-5 sm:p-6 shadow-swiss no-print">
+                <div class="flex flex-wrap items-center justify-between gap-2 mb-3.5">
+                  <span class="text-xs font-bold uppercase tracking-[0.14em] text-magenta">
+                    Coba Cepat dengan Contoh Usaha
+                  </span>
+                  <button
+                    type="button"
+                    onclick="resetPlaygroundSimulation()"
+                    class="text-xs font-bold text-charcoal/55 hover:text-magenta transition-colors"
+                  >
+                    Reset Form
+                  </button>
+                </div>
+                <div class="flex flex-wrap gap-2.5">
+                  <button
+                    type="button"
+                    id="preset-btn-kopi"
+                    onclick="applyPlaygroundPreset('kopi')"
+                    class="preset-btn px-4 py-2.5 rounded-full text-xs sm:text-sm font-bold hairline-border bg-cream text-charcoal hover:border-magenta hover:text-magenta transition-all duration-200"
+                  >
+                    Contoh: Es Kopi Susu
+                  </button>
+                  <button
+                    type="button"
+                    id="preset-btn-baju"
+                    onclick="applyPlaygroundPreset('baju')"
+                    class="preset-btn px-4 py-2.5 rounded-full text-xs sm:text-sm font-bold hairline-border bg-cream text-charcoal hover:border-magenta hover:text-magenta transition-all duration-200"
+                  >
+                    Contoh: Brand Baju
+                  </button>
+                  <button
+                    type="button"
+                    id="preset-btn-desain"
+                    onclick="applyPlaygroundPreset('desain')"
+                    class="preset-btn px-4 py-2.5 rounded-full text-xs sm:text-sm font-bold hairline-border bg-cream text-charcoal hover:border-magenta hover:text-magenta transition-all duration-200"
+                  >
+                    Contoh: Jasa Desain
+                  </button>
+                </div>
+              </div>
+
+              <!-- Form Input Sections A - E -->
+              <form id="playground-form" onsubmit="event.preventDefault()" class="space-y-5">
+
+                <!-- Opsional: Nama Usaha (untuk kop laporan PDF) -->
+                <div class="rounded-3xl bg-white/90 hairline-border p-5 sm:p-6 shadow-swiss print-break-avoid">
+                  <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                    <label for="pg-nama-usaha" class="text-sm font-extrabold text-charcoal">
+                      Nama Usaha
+                    </label>
+                    <span class="text-xs font-semibold text-charcoal/50">Opsional &mdash; untuk judul laporan PDF</span>
+                  </div>
+                  <input
+                    id="pg-nama-usaha"
+                    type="text"
+                    placeholder="Contoh: Kopi Senja FEB"
+                    oninput="clearActivePresetHighlight()"
+                    class="w-full px-4 py-3 rounded-2xl bg-cream/70 border border-charcoal/20 text-sm sm:text-base font-bold text-charcoal placeholder:text-charcoal/35 focus:outline-none focus:border-magenta focus:bg-white transition-all"
+                  />
+                </div>
+
+                <!-- Bagian A: Modal Awal Buka Usaha -->
+                <div class="rounded-3xl bg-white/90 hairline-border p-6 sm:p-7 shadow-swiss print-break-avoid">
+                  <div class="flex items-start justify-between gap-4 mb-4">
+                    <div>
+                      <span class="inline-block text-[10px] font-extrabold uppercase tracking-[0.14em] px-2.5 py-1 rounded-full bg-yellowbrand/50 text-charcoal mb-2">
+                        Bagian A &bull; Opsional
+                      </span>
+                      <h2 class="text-lg sm:text-xl font-extrabold tracking-tight text-charcoal">
+                        Modal Awal Buka Usaha
+                      </h2>
+                    </div>
+                    <!-- Toggle Switch: Rinci Item -->
+                    <label class="inline-flex items-center gap-2.5 cursor-pointer select-none shrink-0 mt-1">
+                      <span class="text-xs font-bold text-charcoal/75">Rinci Item</span>
+                      <span class="relative inline-flex items-center">
+                        <input
+                          id="pg-itemized-a"
+                          type="checkbox"
+                          onchange="toggleItemizedSection('a')"
+                          class="sr-only peer"
+                        />
+                        <span class="w-11 h-6 bg-charcoal/20 peer-focus:outline-none rounded-full peer peer-checked:bg-magenta transition-colors duration-200 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5 shadow-inner"></span>
+                      </span>
+                    </label>
+                  </div>
+                  <label for="pg-modal-awal" class="block text-sm text-charcoal/70 mb-2.5">
+                    Biaya sekali keluar di awal untuk beli alat, renovasi ringan, atau stok pertama.
+                  </label>
+
+                  <!-- Mode Cepat (Toggle OFF): 1 Kolom Total -->
+                  <div id="pg-single-box-a" class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-charcoal/55">Rp</span>
+                    <input
+                      id="pg-modal-awal"
+                      type="text"
+                      inputmode="numeric"
+                      placeholder="Contoh: 10.000.000"
+                      oninput="handleRupiahInput(this)"
+                      class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-cream/70 border border-charcoal/20 text-base font-bold text-charcoal placeholder:text-charcoal/35 focus:outline-none focus:border-magenta focus:bg-white transition-all"
+                    />
+                  </div>
+
+                  <!-- Mode Rinci Item (Toggle ON): Daftar Item Dinamis -->
+                  <div id="pg-itemized-box-a" class="hidden space-y-3 animate-fade-up">
+                    <div id="pg-rows-a" class="space-y-2.5">
+                      <!-- Rendered by renderItemizedRows('a') -->
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 pt-1">
+                      <button
+                        type="button"
+                        onclick="addItemizedRow('a', '')"
+                        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-charcoal hover:bg-magenta text-cream text-xs font-bold transition-colors"
+                      >
+                        <span>+ Tambah Item</span>
+                      </button>
+                      <button type="button" onclick="addItemizedRow('a', 'Peralatan')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Peralatan</button>
+                      <button type="button" onclick="addItemizedRow('a', 'Booth / Renovasi')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Booth/Renovasi</button>
+                      <button type="button" onclick="addItemizedRow('a', 'Stok Bahan Awal')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Stok Awal</button>
+                      <button type="button" onclick="addItemizedRow('a', 'Kemasan Awal')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Kemasan Awal</button>
+                      <button type="button" onclick="addItemizedRow('a', 'Branding / Izin')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Branding/Izin</button>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-cream hairline-border flex items-center justify-between gap-3">
+                      <span class="text-xs font-bold uppercase tracking-wider text-charcoal/65">Total Modal Awal</span>
+                      <span id="pg-sum-a" class="text-base font-extrabold text-charcoal">Rp 0</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bagian B: Biaya Rutin Bulanan -->
+                <div class="rounded-3xl bg-white/90 hairline-border p-6 sm:p-7 shadow-swiss print-break-avoid">
+                  <div class="flex items-start justify-between gap-4 mb-4">
+                    <div>
+                      <span class="inline-block text-[10px] font-extrabold uppercase tracking-[0.14em] px-2.5 py-1 rounded-full bg-yellowbrand/50 text-charcoal mb-2">
+                        Bagian B
+                      </span>
+                      <h2 class="text-lg sm:text-xl font-extrabold tracking-tight text-charcoal">
+                        Biaya Rutin Bulanan
+                      </h2>
+                    </div>
+                    <!-- Toggle Switch: Rinci Item -->
+                    <label class="inline-flex items-center gap-2.5 cursor-pointer select-none shrink-0 mt-1">
+                      <span class="text-xs font-bold text-charcoal/75">Rinci Item</span>
+                      <span class="relative inline-flex items-center">
+                        <input
+                          id="pg-itemized-b"
+                          type="checkbox"
+                          onchange="toggleItemizedSection('b')"
+                          class="sr-only peer"
+                        />
+                        <span class="w-11 h-6 bg-charcoal/20 peer-focus:outline-none rounded-full peer peer-checked:bg-magenta transition-colors duration-200 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5 shadow-inner"></span>
+                      </span>
+                    </label>
+                  </div>
+                  <label for="pg-biaya-rutin" class="block text-sm text-charcoal/70 mb-2.5">
+                    Pengeluaran tetap tiap bulan seperti sewa tempat, listrik, internet, langganan aplikasi, atau gaji tim.
+                  </label>
+
+                  <!-- Mode Cepat (Toggle OFF): 1 Kolom Total -->
+                  <div id="pg-single-box-b" class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-charcoal/55">Rp</span>
+                    <input
+                      id="pg-biaya-rutin"
+                      type="text"
+                      inputmode="numeric"
+                      placeholder="Contoh: 3.000.000"
+                      oninput="handleRupiahInput(this)"
+                      class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-cream/70 border border-charcoal/20 text-base font-bold text-charcoal placeholder:text-charcoal/35 focus:outline-none focus:border-magenta focus:bg-white transition-all"
+                    />
+                  </div>
+
+                  <!-- Mode Rinci Item (Toggle ON): Daftar Biaya Bulanan Dinamis -->
+                  <div id="pg-itemized-box-b" class="hidden space-y-3 animate-fade-up">
+                    <div id="pg-rows-b" class="space-y-2.5">
+                      <!-- Rendered by renderItemizedRows('b') -->
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 pt-1">
+                      <button
+                        type="button"
+                        onclick="addItemizedRow('b', '')"
+                        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-charcoal hover:bg-magenta text-cream text-xs font-bold transition-colors"
+                      >
+                        <span>+ Tambah Item</span>
+                      </button>
+                      <button type="button" onclick="addItemizedRow('b', 'Sewa Tempat')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Sewa Tempat</button>
+                      <button type="button" onclick="addItemizedRow('b', 'Listrik & Air')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Listrik &amp; Air</button>
+                      <button type="button" onclick="addItemizedRow('b', 'Internet / Kuota')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Internet/Kuota</button>
+                      <button type="button" onclick="addItemizedRow('b', 'Gaji Tim')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Gaji Tim</button>
+                      <button type="button" onclick="addItemizedRow('b', 'Langganan Aplikasi')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Aplikasi</button>
+                      <button type="button" onclick="addItemizedRow('b', 'Iklan / Marketing')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Marketing</button>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-cream hairline-border flex items-center justify-between gap-3">
+                      <span class="text-xs font-bold uppercase tracking-wider text-charcoal/65">Total Biaya Rutin / Bulan</span>
+                      <span id="pg-sum-b" class="text-base font-extrabold text-charcoal">Rp 0</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bagian C: Modal per Produk (HPP) & Toggle Platform -->
+                <div class="rounded-3xl bg-white/90 hairline-border p-6 sm:p-7 shadow-swiss print-break-avoid">
+                  <div class="flex items-start justify-between gap-4 mb-4">
+                    <div>
+                      <span class="inline-block text-[10px] font-extrabold uppercase tracking-[0.14em] px-2.5 py-1 rounded-full bg-yellowbrand/50 text-charcoal mb-2">
+                        Bagian C
+                      </span>
+                      <div class="flex items-center gap-2 flex-wrap">
+                        <h2 class="text-lg sm:text-xl font-extrabold tracking-tight text-charcoal">
+                          Modal per Produk (HPP)
+                        </h2>
+                        <span class="help-popover-wrap no-print">
+                          <button
+                            type="button"
+                            class="help-btn"
+                            aria-label="Penjelasan Modal per Produk (HPP)"
+                            aria-expanded="false"
+                            onclick="toggleHelpPopover('help-hpp', event)"
+                          >?</button>
+                        </span>
+                      </div>
+                    </div>
+                    <!-- Toggle Switch: Rinci Item (Opsi 1: per 1 produk) -->
+                    <label class="inline-flex items-center gap-2.5 cursor-pointer select-none shrink-0 mt-1">
+                      <span class="text-xs font-bold text-charcoal/75">Rinci Item</span>
+                      <span class="relative inline-flex items-center">
+                        <input
+                          id="pg-itemized-c"
+                          type="checkbox"
+                          onchange="toggleItemizedSection('c')"
+                          class="sr-only peer"
+                        />
+                        <span class="w-11 h-6 bg-charcoal/20 peer-focus:outline-none rounded-full peer peer-checked:bg-magenta transition-colors duration-200 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5 shadow-inner"></span>
+                      </span>
+                    </label>
+                  </div>
+                  <!-- Inline Help Dropdown: HPP -->
+                  <div id="help-hpp" class="help-popover hidden mb-3 p-3.5 rounded-xl bg-charcoal text-cream text-xs leading-relaxed shadow-md">
+                    Total biaya yang keluar setiap kali kamu membuat atau menjual 1 produk (bahan baku, kemasan, label).
+                  </div>
+
+                  <label for="pg-hpp" class="block text-sm text-charcoal/70 mb-2.5">
+                    Masukkan modal produksi untuk 1 unit produk atau jasa.
+                  </label>
+
+                  <!-- Mode Cepat (Toggle OFF): 1 Kolom Total HPP -->
+                  <div id="pg-single-box-c" class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-charcoal/55">Rp</span>
+                    <input
+                      id="pg-hpp"
+                      type="text"
+                      inputmode="numeric"
+                      placeholder="Contoh: 10.000"
+                      oninput="handleHppOrFeeChange(this)"
+                      class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-cream/70 border border-charcoal/20 text-base font-bold text-charcoal placeholder:text-charcoal/35 focus:outline-none focus:border-magenta focus:bg-white transition-all"
+                    />
+                  </div>
+
+                  <!-- Mode Rinci Item (Toggle ON): Rincian Komponen per 1 Produk -->
+                  <div id="pg-itemized-box-c" class="hidden space-y-3 animate-fade-up">
+                    <div id="pg-rows-c" class="space-y-2.5">
+                      <!-- Rendered by renderItemizedRows('c') -->
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2 pt-1">
+                      <button
+                        type="button"
+                        onclick="addItemizedRow('c', '')"
+                        class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-charcoal hover:bg-magenta text-cream text-xs font-bold transition-colors"
+                      >
+                        <span>+ Tambah Item</span>
+                      </button>
+                      <button type="button" onclick="addItemizedRow('c', 'Bahan Utama')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Bahan Utama</button>
+                      <button type="button" onclick="addItemizedRow('c', 'Bahan Tambahan')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Bahan Tambahan</button>
+                      <button type="button" onclick="addItemizedRow('c', 'Kemasan / Cup')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Kemasan/Cup</button>
+                      <button type="button" onclick="addItemizedRow('c', 'Stiker / Label')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Stiker/Label</button>
+                      <button type="button" onclick="addItemizedRow('c', 'Ongkir Bahan')" class="px-3 py-1.5 rounded-full bg-cream hover:bg-yellowbrand/45 text-charcoal text-[11px] font-bold hairline-border transition-colors">+ Ongkir Bahan</button>
+                    </div>
+                    <div class="p-3.5 rounded-2xl bg-cream hairline-border flex items-center justify-between gap-3">
+                      <span class="text-xs font-bold uppercase tracking-wider text-charcoal/65">Total HPP per Produk</span>
+                      <span id="pg-sum-c" class="text-base font-extrabold text-charcoal">Rp 0</span>
+                    </div>
+                  </div>
+
+                  <!-- Optional Toggle: Jual di Marketplace / Ojol? -->
+                  <div class="mt-5 pt-5 hairline-t">
+                    <label class="flex items-center justify-between gap-4 cursor-pointer select-none">
+                      <div>
+                        <span class="block text-sm font-bold text-charcoal">
+                          Jual di Marketplace / Ojol?
+                        </span>
+                        <span class="block text-xs text-charcoal/60 mt-0.5">
+                          Aktifkan jika jualan di Shopee, Tokopedia, GoFood, atau GrabFood.
+                        </span>
+                      </div>
+                      <span class="relative inline-flex items-center shrink-0">
+                        <input
+                          id="pg-use-platform"
+                          type="checkbox"
+                          onchange="togglePlatformFee()"
+                          class="sr-only peer"
+                        />
+                        <span class="w-12 h-7 bg-charcoal/20 peer-focus:outline-none rounded-full peer peer-checked:bg-magenta transition-colors duration-200 after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-[22px] after:w-[22px] after:transition-all peer-checked:after:translate-x-5 shadow-inner"></span>
+                      </span>
+                    </label>
+
+                    <!-- Conditional Platform Fee Percentage Input -->
+                    <div id="pg-platform-fee-box" class="hidden mt-4 p-4 rounded-2xl bg-cream hairline-border animate-fade-up">
+                      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div>
+                          <div class="flex items-center gap-2">
+                            <label for="pg-platform-fee" class="text-xs sm:text-sm font-bold text-charcoal">
+                              Biaya Admin Platform (%)
+                            </label>
+                            <span class="help-popover-wrap no-print">
+                              <button
+                                type="button"
+                                class="help-btn"
+                                aria-label="Penjelasan Biaya Admin Platform"
+                                aria-expanded="false"
+                                onclick="toggleHelpPopover('help-admin', event)"
+                              >?</button>
+                            </span>
+                          </div>
+                          <span class="block text-[11px] text-charcoal/60 mt-0.5">
+                            Umumnya 10% – 20% dari harga jual.
+                          </span>
+                        </div>
+                        <div class="relative w-full sm:w-32 shrink-0">
+                          <input
+                            id="pg-platform-fee"
+                            type="number"
+                            min="0"
+                            max="60"
+                            step="0.5"
+                            value="15"
+                            oninput="handlePlatformFeeInput()"
+                            class="w-full pl-4 pr-9 py-2.5 rounded-xl bg-white border border-charcoal/20 text-sm font-extrabold text-charcoal focus:outline-none focus:border-magenta"
+                          />
+                          <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-sm font-bold text-charcoal/55">%</span>
+                        </div>
+                      </div>
+                      <div id="help-admin" class="help-popover hidden mt-2.5 p-3.5 rounded-xl bg-charcoal text-cream text-xs leading-relaxed shadow-md">
+                        Potongan persentase dari harga jual yang diambil oleh Shopee, Tokopedia, GoFood, atau GrabFood.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bagian D: Target Margin & Harga Jual -->
+                <div class="rounded-3xl bg-white/90 hairline-border p-6 sm:p-7 shadow-swiss print-break-avoid">
+                  <div class="mb-5">
+                    <span class="inline-block text-[10px] font-extrabold uppercase tracking-[0.14em] px-2.5 py-1 rounded-full bg-magenta/10 text-magenta mb-2">
+                      Bagian D
+                    </span>
+                    <h2 class="text-lg sm:text-xl font-extrabold tracking-tight text-charcoal">
+                      Target Margin &amp; Harga Jual
+                    </h2>
+                  </div>
+
+                  <!-- Margin Keuntungan Slider -->
+                  <div class="p-4 sm:p-5 rounded-2xl bg-cream/85 hairline-border mb-5">
+                    <div class="flex items-center justify-between gap-2 mb-2.5">
+                      <div class="flex items-center gap-2">
+                        <label for="slider-margin" class="text-sm font-bold text-charcoal">
+                          Margin Keuntungan
+                        </label>
+                        <span class="help-popover-wrap no-print">
+                          <button
+                            type="button"
+                            class="help-btn"
+                            aria-label="Penjelasan Margin Keuntungan"
+                            aria-expanded="false"
+                            onclick="toggleHelpPopover('help-margin', event)"
+                          >?</button>
+                        </span>
+                      </div>
+                      <span id="val-slider-margin" class="px-3 py-0.5 rounded-full bg-magenta text-white text-xs font-extrabold">
+                        40%
+                      </span>
+                    </div>
+                    <div id="help-margin" class="help-popover hidden mb-3 p-3.5 rounded-xl bg-charcoal text-cream text-xs leading-relaxed shadow-md">
+                      Persentase keuntungan bersih yang kamu dapatkan dari setiap 1 produk yang terjual.
+                    </div>
+                    <input
+                      id="slider-margin"
+                      type="range"
+                      min="5"
+                      max="75"
+                      step="1"
+                      value="40"
+                      oninput="handleMarginSliderChange()"
+                      class="swiss-slider no-print"
+                    />
+                    <div class="flex justify-between text-[10px] font-semibold text-charcoal/50 mt-1.5 no-print">
+                      <span>5%</span>
+                      <span>Target Margin Bersih</span>
+                      <span id="slider-margin-max-label">75%</span>
+                    </div>
+                  </div>
+
+                  <!-- Rencana Harga Jual (Auto-computed from Margin, Editable Two-Way Sync) & Target Untung -->
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label for="pg-harga-jual" class="block text-sm font-bold text-charcoal mb-1">
+                        Rencana Harga Jual per Produk
+                      </label>
+                      <p class="text-xs text-charcoal/60 mb-2.5">
+                        Geser slider margin untuk hitung otomatis, atau edit manual.
+                      </p>
+                      <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-charcoal/55">Rp</span>
+                        <input
+                          id="pg-harga-jual"
+                          type="text"
+                          inputmode="numeric"
+                          placeholder="Otomatis dari margin"
+                          oninput="handleManualPriceInput(this)"
+                          class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-cream/70 border border-charcoal/20 text-base font-bold text-charcoal placeholder:text-charcoal/35 focus:outline-none focus:border-magenta focus:bg-white transition-all"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label for="pg-target-untung" class="block text-sm font-bold text-charcoal mb-1">
+                        Target Untung Bersih / Bulan
+                      </label>
+                      <p class="text-xs text-charcoal/60 mb-2.5">
+                        Laba bersih yang ingin dibawa pulang.
+                      </p>
+                      <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-charcoal/55">Rp</span>
+                        <input
+                          id="pg-target-untung"
+                          type="text"
+                          inputmode="numeric"
+                          placeholder="Contoh: 5.000.000"
+                          oninput="handleRupiahInput(this)"
+                          class="w-full pl-11 pr-4 py-3.5 rounded-2xl bg-cream/70 border border-charcoal/20 text-base font-bold text-charcoal placeholder:text-charcoal/35 focus:outline-none focus:border-magenta focus:bg-white transition-all"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bagian E (Opsional): Uji Skenario "Bagaimana Jika..." -->
+                <div class="rounded-3xl bg-white/90 hairline-border p-6 sm:p-7 shadow-swiss print-break-avoid">
+                  <div class="flex items-start justify-between gap-4">
+                    <div>
+                      <span class="inline-block text-[10px] font-extrabold uppercase tracking-[0.14em] px-2.5 py-1 rounded-full bg-charcoal/10 text-charcoal mb-2">
+                        Bagian E • Opsional
+                      </span>
+                      <h2 class="text-lg sm:text-xl font-extrabold tracking-tight text-charcoal">
+                        Uji Skenario &ldquo;Bagaimana Jika...&rdquo;
+                      </h2>
+                      <p class="text-xs sm:text-sm text-charcoal/65 mt-1">
+                        Simulasikan dampak diskon promo atau kenaikan harga bahan baku terhadap margin &amp; BEP.
+                      </p>
+                    </div>
+                    <label class="relative inline-flex items-center shrink-0 cursor-pointer mt-1">
+                      <input
+                        id="pg-use-scenario"
+                        type="checkbox"
+                        onchange="toggleScenarioSection()"
+                        class="sr-only peer"
+                      />
+                      <span class="w-12 h-7 bg-charcoal/20 peer-focus:outline-none rounded-full peer peer-checked:bg-magenta transition-colors duration-200 after:content-[''] after:absolute after:top-[3px] after:left-[3px] after:bg-white after:rounded-full after:h-[22px] after:w-[22px] after:transition-all peer-checked:after:translate-x-5 shadow-inner"></span>
+                    </label>
+                  </div>
+
+                  <!-- Optional Sliders Box (Hidden when Toggle is OFF) -->
+                  <div id="pg-scenario-box" class="hidden mt-5 pt-5 hairline-t space-y-4 animate-fade-up">
+                    <!-- Slider 1: Diskon Promo (0% - 50%) -->
+                    <div class="p-4 rounded-2xl bg-cream/85 hairline-border">
+                      <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-charcoal mb-2.5">
+                        <label for="slider-diskon">Simulasi Diskon Promo</label>
+                        <span id="val-slider-diskon" class="px-2.5 py-0.5 rounded-full bg-magenta/10 text-magenta font-extrabold">
+                          0%
+                        </span>
+                      </div>
+                      <input
+                        id="slider-diskon"
+                        type="range"
+                        min="0"
+                        max="50"
+                        step="1"
+                        value="0"
+                        oninput="handleScenarioSliderChange()"
+                        class="swiss-slider no-print"
+                      />
+                      <div class="flex justify-between text-[10px] font-semibold text-charcoal/45 mt-1.5 no-print">
+                        <span>0% (Normal)</span>
+                        <span>25%</span>
+                        <span>50%</span>
+                      </div>
+                    </div>
+
+                    <!-- Slider 2: Kenaikan Harga Bahan Baku (0% - 30%) -->
+                    <div class="p-4 rounded-2xl bg-cream/85 hairline-border">
+                      <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-charcoal mb-2.5">
+                        <label for="slider-hpp">Simulasi Kenaikan Harga Bahan Baku</label>
+                        <span id="val-slider-hpp" class="px-2.5 py-0.5 rounded-full bg-yellowbrand/60 text-charcoal font-extrabold">
+                          +0%
+                        </span>
+                      </div>
+                      <input
+                        id="slider-hpp"
+                        type="range"
+                        min="0"
+                        max="30"
+                        step="1"
+                        value="0"
+                        oninput="handleScenarioSliderChange()"
+                        class="swiss-slider no-print"
+                      />
+                      <div class="flex justify-between text-[10px] font-semibold text-charcoal/45 mt-1.5 no-print">
+                        <span>0% (Normal)</span>
+                        <span>15%</span>
+                        <span>30%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </form>
+            </div>
+
+            <!-- ===============================================================
+                 RIGHT COLUMN: STICKY RESULT PANEL (5 COLS)
+                 =============================================================== -->
+            <div class="lg:col-span-5 playground-sticky-panel lg:sticky lg:top-24 space-y-5">
+
+              <!-- EMPTY STATE PANEL (Shown before user types or clicks Quick-Fill) -->
+              <div
+                id="pg-empty-state"
+                class="rounded-3xl bg-white/95 border-[1.5px] border-charcoal p-8 sm:p-10 shadow-swiss text-center"
+              >
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-cream hairline-border flex items-center justify-center mb-5">
+                  <svg class="w-8 h-8 text-magenta" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                  </svg>
+                </div>
+                <h2 class="text-xl font-extrabold tracking-tight text-charcoal">
+                  Siap Menguji Ide Bisnismu?
+                </h2>
+                <p class="mt-3 text-sm text-charcoal/70 leading-relaxed">
+                  Mulai isi rincian biaya usahamu di sebelah kiri, atau klik salah satu Contoh Usaha di atas untuk melihat hasil simulasi.
+                </p>
+              </div>
+
+              <!-- ACTIVE RESULTS PANEL (Hidden until inputs are filled) -->
+              <div
+                id="pg-results-panel"
+                class="hidden rounded-3xl bg-white/95 border-[1.5px] border-charcoal p-6 sm:p-7 shadow-swiss print-break-avoid"
+              >
+                <!-- Panel Top Bar + Traffic Light Status Badge -->
+                <div class="flex flex-wrap items-center justify-between gap-3 pb-5 hairline-b">
+                  <div>
+                    <h2 class="text-xl font-extrabold tracking-tight text-charcoal">
+                      Ringkasan Kelayakan
+                    </h2>
+                    <span
+                      id="pg-scenario-active-tag"
+                      class="hidden mt-1 inline-flex items-center gap-1.5 text-[11px] font-bold text-magenta"
+                    >
+                      <span class="w-1.5 h-1.5 rounded-full bg-magenta"></span>
+                      Skenario Uji Aktif
+                    </span>
+                  </div>
+                  <div
+                    id="pg-status-badge"
+                    class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider bg-emerald-100 text-emerald-800 border border-emerald-300"
+                  >
+                    <span id="pg-status-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                    <span id="pg-status-text">Sehat</span>
+                  </div>
+                </div>
+
+                <!-- Edge Case Red Error Banner (Hidden by default) -->
+                <div
+                  id="pg-error-alert"
+                  class="hidden mt-5 p-4 rounded-2xl bg-rose-50 border-2 border-rose-500 text-rose-900"
+                  role="alert"
+                >
+                  <div class="flex items-start gap-3">
+                    <svg class="w-5 h-5 text-rose-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                    </svg>
+                    <div>
+                      <p class="text-sm font-extrabold text-rose-800">
+                        Harga jual belum menutup modal per produk
+                      </p>
+                      <p id="pg-error-detail" class="text-xs text-rose-700 mt-1 leading-relaxed">
+                        Naikkan harga jual, kurangi diskon promo, atau tekan biaya bahan baku/admin platform agar usaha tidak merugi.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Main Metric Cards -->
+                <div class="mt-5 space-y-3.5">
+
+                  <!-- Metric 1: Profit Bersih per 1 Produk -->
+                  <div class="p-4 sm:p-5 rounded-2xl bg-charcoal text-cream relative overflow-hidden">
+                    <span class="text-[11px] font-bold uppercase tracking-[0.12em] text-yellowbrand block">
+                      Profit Bersih per 1 Produk Terjual
+                    </span>
+                    <div class="mt-1.5 flex items-baseline gap-2.5 flex-wrap">
+                      <span id="res-profit-unit" class="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+                        Rp 0
+                      </span>
+                      <span id="res-margin-pct" class="text-xs font-extrabold px-2.5 py-0.5 rounded-full bg-white/15 text-yellowbrand">
+                        0%
+                      </span>
+                    </div>
+                    <p id="res-unit-breakdown" class="text-[11px] text-cream/70 mt-2 leading-relaxed">
+                      Harga jual efektif dikurangi HPP &amp; biaya admin.
+                    </p>
+                  </div>
+
+                  <!-- Metric 2: BEP (Titik Balik Modal) + "?" Button -->
+                  <div class="p-4 rounded-2xl bg-cream hairline-border">
+                    <div class="flex items-center gap-2">
+                      <span class="text-[11px] font-bold uppercase tracking-[0.12em] text-magenta">
+                        BEP (Titik Balik Modal)
+                      </span>
+                      <span class="help-popover-wrap no-print">
+                        <button
+                          type="button"
+                          class="help-btn"
+                          aria-label="Penjelasan BEP (Titik Balik Modal)"
+                          aria-expanded="false"
+                          onclick="toggleHelpPopover('help-bep', event)"
+                        >?</button>
+                      </span>
+                    </div>
+                    <div id="help-bep" class="help-popover hidden mt-2 mb-1 p-3 rounded-xl bg-charcoal text-cream text-xs leading-relaxed shadow-md">
+                      Jumlah minimal produk yang harus terjual agar semua biaya yang kamu keluarkan tertutupi (belum untung, tapi tidak rugi).
+                    </div>
+                    <p id="res-bep-text" class="mt-1 text-base sm:text-lg font-extrabold text-charcoal leading-snug">
+                      0 pcs/bulan (atau 0 pcs/hari, asumsi 30 hari)
+                    </p>
+                    <p id="res-bep-omzet" class="text-xs text-charcoal/60 mt-1">
+                      Omzet titik impas: Rp 0/bulan
+                    </p>
+                  </div>
+
+                  <!-- Metric 3: Target Jual Biar Tercapai Untung -->
+                  <div class="p-4 rounded-2xl bg-cream hairline-border">
+                    <span class="text-[11px] font-bold uppercase tracking-[0.12em] text-charcoal/65 block">
+                      Target Jual Biar Tercapai Untung
+                    </span>
+                    <p id="res-target-text" class="mt-1 text-base sm:text-lg font-extrabold text-charcoal leading-snug">
+                      Butuh jual 0 pcs/bulan (0 pcs/hari)
+                    </p>
+                    <p id="res-target-omzet" class="text-xs text-charcoal/60 mt-1">
+                      Estimasi omzet bulanan: Rp 0
+                    </p>
+                  </div>
+
+                  <!-- Metric 4: Payback Period & ROI Bulanan + "?" Buttons -->
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="p-4 rounded-2xl bg-cream hairline-border">
+                      <div class="flex items-center gap-1.5">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-charcoal/60">
+                          Payback Period
+                        </span>
+                        <span class="help-popover-wrap no-print">
+                          <button
+                            type="button"
+                            class="help-btn"
+                            aria-label="Penjelasan Payback Period"
+                            aria-expanded="false"
+                            onclick="toggleHelpPopover('help-payback', event)"
+                          >?</button>
+                        </span>
+                      </div>
+                      <div id="help-payback" class="help-popover hidden mt-2 p-3 rounded-xl bg-charcoal text-cream text-[11px] leading-relaxed shadow-md">
+                        Perkiraan berapa bulan waktu yang dibutuhkan sampai modal awal buka usahamu kembali sepenuhnya dari keuntungan bersih.
+                      </div>
+                      <p id="res-payback" class="mt-1.5 text-lg font-extrabold text-charcoal">
+                        —
+                      </p>
+                      <p class="text-[11px] text-charcoal/55 mt-0.5">Estimasi Balik Modal Awal</p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-cream hairline-border">
+                      <div class="flex items-center gap-1.5">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.12em] text-charcoal/60">
+                          ROI Bulanan
+                        </span>
+                        <span class="help-popover-wrap no-print">
+                          <button
+                            type="button"
+                            class="help-btn"
+                            aria-label="Penjelasan ROI Bulanan"
+                            aria-expanded="false"
+                            onclick="toggleHelpPopover('help-roi', event)"
+                          >?</button>
+                        </span>
+                      </div>
+                      <div id="help-roi" class="help-popover hidden mt-2 p-3 rounded-xl bg-charcoal text-cream text-[11px] leading-relaxed shadow-md">
+                        Persentase kecepatan pengembalian modal awalmu setiap bulannya.
+                      </div>
+                      <p id="res-roi" class="mt-1.5 text-lg font-extrabold text-magenta">
+                        —
+                      </p>
+                      <p class="text-[11px] text-charcoal/55 mt-0.5">Return on Investment</p>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Action Buttons: Reset Simulasi & Cetak PDF -->
+                <div class="mt-6 pt-5 hairline-t flex flex-col sm:flex-row gap-3 no-print">
+                  <button
+                    type="button"
+                    onclick="resetPlaygroundSimulation()"
+                    class="flex-1 px-4 py-3 rounded-full hairline-border bg-cream hover:bg-charcoal hover:text-cream text-charcoal text-xs sm:text-sm font-bold transition-colors duration-200"
+                  >
+                    Reset Simulasi
+                  </button>
+                  <button
+                    type="button"
+                    onclick="printPlaygroundSummary()"
+                    class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-charcoal hover:bg-magenta text-cream text-xs sm:text-sm font-bold shadow-swiss transition-colors duration-200"
+                  >
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
+                    </svg>
+                    <span>Cetak / Simpan PDF</span>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       MODAL: PRATINJAU & UNDUH LAPORAN PDF SIMULATOR (A4)
+       ========================================================================= -->
+  <div
+    id="pdf-preview-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="pdf-preview-title"
+  >
+    <div
+      class="absolute inset-0 bg-charcoal/70 backdrop-blur-xs"
+      onclick="closePdfPreviewModal()"
+    ></div>
+
+    <div class="relative z-10 w-full max-w-4xl max-h-[92vh] bg-cream rounded-3xl border-2 border-charcoal shadow-2xl flex flex-col overflow-hidden animate-fade-up">
+      <!-- Modal Header -->
+      <div class="px-5 py-4 sm:px-7 hairline-b bg-white/90 flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span class="block text-[10px] font-extrabold uppercase tracking-[0.16em] text-magenta">
+            PRATINJAU LAPORAN A4
+          </span>
+          <h3 id="pdf-preview-title" class="text-lg sm:text-xl font-extrabold tracking-tight text-charcoal">
+            Laporan Simulasi Kelayakan Usaha &amp; BEP
+          </h3>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            onclick="downloadPlaygroundPDF()"
+            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-magenta hover:bg-charcoal text-white text-xs sm:text-sm font-bold shadow-swiss transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+            </svg>
+            <span>Unduh PDF</span>
+          </button>
+          <button
+            type="button"
+            onclick="triggerBrowserPrint()"
+            class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full hairline-border bg-cream hover:bg-charcoal hover:text-cream text-charcoal text-xs sm:text-sm font-bold transition-colors"
+          >
+            <span>Print</span>
+          </button>
+          <button
+            type="button"
+            onclick="closePdfPreviewModal()"
+            class="p-2 rounded-full border border-charcoal/25 text-charcoal hover:bg-magenta hover:text-white hover:border-magenta transition-colors"
+            aria-label="Tutup Pratinjau PDF"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Scrollable A4 Paper Preview -->
+      <div class="p-4 sm:p-8 overflow-y-auto flex-1 custom-scroll bg-charcoal/10">
+        <div
+          id="pdf-preview-sheet"
+          class="max-w-[794px] mx-auto bg-white rounded-2xl shadow-lg border border-charcoal/10 p-6 sm:p-10"
+        >
+          <!-- Populated dynamically by buildPrintReportHTML() -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       FOOTER RESMI FEBERBISNIS
+       ========================================================================= -->
+  <footer class="bg-charcoal text-cream hairline-t">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-cream/15">
+        <!-- Brand Column -->
+        <div class="md:col-span-6 space-y-4">
+          <div class="inline-flex items-center h-9 sm:h-10">
+            <img
+              src="assets/img/brand/feberbisnis-light.png"
+              alt="Logo FEBerbisnis"
+              class="h-9 sm:h-10 w-auto object-contain"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            />
+            <svg style="display:none;" viewBox="0 0 186 44" class="h-9 sm:h-10 w-auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo FEBerbisnis Light">
+              <circle cx="16" cy="22" r="7" fill="#E5006E" />
+              <circle cx="27" cy="22" r="5" fill="#FFCE13" fill-opacity="0.95" />
+              <text x="42" y="28" fill="#FEF6EB" font-family="Plus Jakarta Sans, sans-serif" font-size="19" font-weight="800" letter-spacing="-0.6">
+                FEB<tspan fill="#FFCE13">erbisnis</tspan>
+              </text>
+            </svg>
+          </div>
+          <p class="text-sm text-cream/70 max-w-md leading-relaxed">
+            Organisasi pengembangan minat kewirausahaan di lingkup Fakultas Ekonomika dan Bisnis—menjadi pusat jejaring, inspirasi, dan sinergi generasi muda pegiat bisnis.
+          </p>
+        </div>
+
+        <!-- Navigation Column -->
+        <div class="md:col-span-3">
+          <h3 class="text-xs font-bold uppercase tracking-[0.16em] text-yellowbrand mb-4">
+            Navigasi
+          </h3>
+          <ul class="space-y-2.5 text-sm text-cream/80">
+            <li><button type="button" onclick="switchTab('home')" class="hover:text-yellowbrand transition-colors">Home</button></li>
+            <li><button type="button" onclick="switchTab('programs')" class="hover:text-yellowbrand transition-colors">Program &amp; Events</button></li>
+            <li><button type="button" onclick="switchTab('community')" class="hover:text-yellowbrand transition-colors">Community Hub</button></li>
+            <li><button type="button" onclick="switchTab('shop')" class="hover:text-yellowbrand transition-colors">Shop</button></li>
+            <li><button type="button" onclick="switchTab('playground')" class="hover:text-yellowbrand transition-colors">Playground</button></li>
+          </ul>
+        </div>
+
+        <!-- Main Programs Column -->
+        <div class="md:col-span-3">
+          <h3 class="text-xs font-bold uppercase tracking-[0.16em] text-yellowbrand mb-4">
+            Program Utama
+          </h3>
+          <ul class="space-y-2.5 text-sm text-cream/80">
+            <li>Mentoring</li>
+            <li>Networking</li>
+            <li>One Day to Start a Business</li>
+            <li>Membership</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-cream/55">
+        <span>&copy; 2026 FEBerbisnis. All rights reserved.</span>
+        <span>We Connect, Learn and Grow together.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       OVERLAY MODAL: ORGANOGRAM PHOTO GRID (WITH NAME OVERLAY) & MEMBER LIST
+       ========================================================================= -->
+  <div
+    id="org-overlay-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="drawer-title"
+  >
+    <!-- Backdrop -->
+    <div
+      class="absolute inset-0 bg-charcoal/65 backdrop-blur-xs"
+      onclick="closeOrgDrawer()"
+    ></div>
+
+    <!-- Centered Overlay Panel -->
+    <div class="relative z-10 w-full max-w-4xl max-h-[90vh] bg-cream rounded-3xl border-2 border-charcoal shadow-2xl flex flex-col overflow-hidden animate-fade-up">
+      <!-- Overlay Header -->
+      <div class="px-6 py-5 sm:px-8 hairline-b bg-white/80 flex items-start justify-between gap-4">
+        <div>
+          <div class="flex flex-wrap items-center gap-2 mb-1.5">
+            <span id="drawer-level-badge" class="inline-block text-[11px] font-bold uppercase tracking-[0.14em] px-2.5 py-1 rounded-full bg-magenta text-white">
+              Unit 2026
+            </span>
+            <span id="drawer-count" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-yellowbrand text-charcoal">
+              0 Orang
+            </span>
+          </div>
+          <h3 id="drawer-title" class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal">
+            Nama Divisi
+          </h3>
+        </div>
+        <button
+          type="button"
+          onclick="closeOrgDrawer()"
+          class="p-2.5 rounded-full border border-charcoal/25 text-charcoal hover:bg-magenta hover:text-white hover:border-magenta transition-colors shrink-0"
+          aria-label="Tutup Overlay Pengurus"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Overlay Scrollable Body -->
+      <div class="p-6 sm:p-8 overflow-y-auto flex-1 custom-scroll space-y-6">
+        <p id="drawer-desc" class="text-sm sm:text-base text-charcoal/75 leading-relaxed">
+          Deskripsi unit.
+        </p>
+
+        <!-- Photo Cards Grid with Bottom Name Overlay -->
+        <div id="drawer-members-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Overlay Footer -->
+      <div class="px-6 py-4 sm:px-8 hairline-t bg-white/60 flex items-center justify-between text-xs text-charcoal/60">
+        <span id="drawer-footer-label">Data Struktural Resmi • FEBerbisnis 2026</span>
+        <button
+          type="button"
+          onclick="closeOrgDrawer()"
+          class="px-4 py-2 rounded-full bg-charcoal text-cream font-semibold hover:bg-magenta transition-colors"
+        >
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: PROGRAM PUBLICATION & DOCUMENTATION GALLERY
+       ========================================================================= -->
+  <div
+    id="program-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-program-title"
+  >
+    <!-- Backdrop -->
+    <div
+      class="absolute inset-0 bg-charcoal/60 backdrop-blur-xs"
+      onclick="closeProgramModal()"
+    ></div>
+
+    <!-- Modal Card -->
+    <div class="relative z-10 w-full max-w-3xl max-h-[90vh] bg-cream rounded-3xl hairline-border shadow-2xl flex flex-col overflow-hidden animate-fade-up">
+      <!-- Modal Top Header -->
+      <div class="px-6 py-5 sm:px-8 hairline-b bg-white/70 flex items-start justify-between gap-4">
+        <div>
+          <span id="modal-program-category" class="inline-block text-[11px] font-bold uppercase tracking-[0.14em] px-3 py-1 rounded-full bg-magenta/10 text-magenta mb-2">
+            Category
+          </span>
+          <h3 id="modal-program-title" class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal">
+            Judul Program
+          </h3>
+        </div>
+        <button
+          type="button"
+          onclick="closeProgramModal()"
+          class="p-2.5 rounded-xl hairline-border text-charcoal hover:bg-charcoal hover:text-cream transition-colors shrink-0"
+          aria-label="Tutup Modal Publikasi"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Scrollable Content -->
+      <div class="p-6 sm:p-8 overflow-y-auto custom-scroll space-y-8">
+        <!-- Publication Write-up -->
+        <div class="grid grid-cols-1 gap-6">
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-[0.16em] text-magenta mb-2">
+              Latar Belakang
+            </h4>
+            <p id="modal-program-background" class="text-sm sm:text-base text-charcoal/80 leading-relaxed"></p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-white/75 hairline-border">
+            <h4 class="text-xs font-bold uppercase tracking-[0.16em] text-charcoal/60 mb-2">
+              Fokus Kegiatan
+            </h4>
+            <p id="modal-program-focus" class="text-sm sm:text-base text-charcoal/85 leading-relaxed"></p>
+          </div>
+
+          <div class="p-5 rounded-2xl bg-charcoal text-cream relative overflow-hidden">
+            <div class="relative z-10">
+              <h4 class="text-xs font-bold uppercase tracking-[0.16em] text-yellowbrand mb-2">
+                Highlight Dampak
+              </h4>
+              <p id="modal-program-impact" class="text-sm sm:text-base text-cream/90 leading-relaxed"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Documentation Gallery -->
+        <div class="pt-4 hairline-t">
+          <div class="flex items-center justify-between mb-4">
+            <h4 class="text-xs font-bold uppercase tracking-[0.16em] text-charcoal">
+              Galeri Dokumentasi
+            </h4>
+            <span class="text-xs text-charcoal/55">Arsip Visual Kegiatan</span>
+          </div>
+          <div id="modal-program-gallery" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Populated dynamically with crisp Swiss SVG documentation frames -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer (Informational only — no registration/action buttons) -->
+      <div class="px-6 py-4 sm:px-8 hairline-t bg-white/60 flex items-center justify-between text-xs text-charcoal/60">
+        <span>Publikasi Resmi • FEBerbisnis</span>
+        <button
+          type="button"
+          onclick="closeProgramModal()"
+          class="px-4 py-2 rounded-full bg-charcoal text-cream font-semibold hover:bg-magenta transition-colors"
+        >
+          Selesai Membaca
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: COMMUNITY HUB DETAIL OVERLAY (MEMBER BUSINESS / INTEREST PROFILE)
+       ========================================================================= -->
+  <div
+    id="community-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="community-modal-title"
+  >
+    <div
+      class="absolute inset-0 bg-charcoal/65 backdrop-blur-xs"
+      onclick="closeCommunityModal()"
+    ></div>
+
+    <div class="relative z-10 w-full max-w-2xl max-h-[90vh] bg-cream rounded-3xl border-2 border-charcoal shadow-2xl flex flex-col overflow-hidden animate-fade-up">
+      <div class="px-6 py-5 sm:px-8 hairline-b bg-white/80 flex items-start justify-between gap-4">
+        <div>
+          <span id="community-modal-badge" class="inline-block text-[11px] font-extrabold uppercase tracking-[0.14em] px-3 py-1 rounded-full bg-yellowbrand/60 text-charcoal mb-2">
+            Kategori
+          </span>
+          <h3 id="community-modal-title" class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal">
+            Detail Profil
+          </h3>
+        </div>
+        <button
+          type="button"
+          onclick="closeCommunityModal()"
+          class="p-2.5 rounded-full border border-charcoal/25 text-charcoal hover:bg-magenta hover:text-white hover:border-magenta transition-colors shrink-0"
+          aria-label="Tutup Detail Community Hub"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <div id="community-modal-body" class="p-6 sm:p-8 overflow-y-auto custom-scroll space-y-6">
+        <!-- Populated dynamically by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: SHOP PRODUCT DETAIL OVERLAY (MULTI-PHOTO GALLERY + ORDER IG)
+       ========================================================================= -->
+  <div
+    id="shop-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="shop-modal-title"
+  >
+    <div
+      class="absolute inset-0 bg-charcoal/65 backdrop-blur-xs"
+      onclick="closeShopModal()"
+    ></div>
+
+    <div class="relative z-10 w-full max-w-4xl max-h-[90vh] bg-cream rounded-3xl border-2 border-charcoal shadow-2xl flex flex-col overflow-hidden animate-fade-up">
+      <!-- Top Bar -->
+      <div class="px-6 py-4 sm:px-8 hairline-b bg-white/80 flex items-center justify-between gap-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <span id="shop-modal-biz" class="text-xs font-extrabold uppercase tracking-[0.12em] px-3 py-1 rounded-full bg-charcoal text-cream">
+            Nama Bisnis
+          </span>
+          <span id="shop-modal-type" class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-yellowbrand/55 text-charcoal">
+            Produk Fisik
+          </span>
+        </div>
+        <button
+          type="button"
+          onclick="closeShopModal()"
+          class="p-2.5 rounded-full border border-charcoal/25 text-charcoal hover:bg-magenta hover:text-white hover:border-magenta transition-colors shrink-0"
+          aria-label="Tutup Detail Produk"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- 2-Column Product Detail Body -->
+      <div class="p-6 sm:p-8 overflow-y-auto custom-scroll">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-7 items-start">
+          <!-- Left: Multi-Photo Stage & Thumbnails -->
+          <div class="md:col-span-6 space-y-3">
+            <div id="shop-modal-stage" class="aspect-square w-full rounded-2xl overflow-hidden border border-charcoal/20 bg-charcoal relative">
+              <!-- Active photo rendered by JS -->
+            </div>
+            <div id="shop-modal-thumbs" class="grid grid-cols-3 gap-2.5">
+              <!-- Thumbnails rendered by JS -->
+            </div>
+          </div>
+
+          <!-- Right: Product Info & Order CTA -->
+          <div class="md:col-span-6 flex flex-col justify-between h-full space-y-5">
+            <div>
+              <h3 id="shop-modal-title" class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal leading-tight">
+                Nama Produk
+              </h3>
+              <p id="shop-modal-price" class="mt-2.5 text-2xl font-extrabold text-magenta">
+                Rp 0
+              </p>
+
+              <div class="mt-5 pt-5 hairline-t">
+                <h4 class="text-xs font-bold uppercase tracking-[0.14em] text-charcoal/60 mb-2">
+                  Deskripsi Produk
+                </h4>
+                <p id="shop-modal-desc" class="text-sm sm:text-[15px] text-charcoal/80 leading-relaxed"></p>
+              </div>
+
+              <div class="mt-5 p-4 rounded-2xl bg-white/80 hairline-border">
+                <h4 class="text-xs font-bold uppercase tracking-[0.14em] text-magenta mb-2">
+                  Detail &amp; Ketentuan
+                </h4>
+                <ul id="shop-modal-specs" class="space-y-1.5 text-xs sm:text-sm text-charcoal/80 list-disc pl-4">
+                  <!-- Rendered by JS -->
+                </ul>
+              </div>
+            </div>
+
+            <div class="pt-4 hairline-t space-y-2.5">
+              <a
+                id="shop-modal-order-link"
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-magenta hover:bg-charcoal text-white text-sm font-bold shadow-swiss transition-colors duration-200"
+              >
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+                <span id="shop-modal-order-text">Order via Instagram</span>
+              </a>
+              <p class="text-[11px] text-center text-charcoal/55">
+                Kamu akan diarahkan langsung ke halaman Instagram bisnis terkait untuk pemesanan.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: BECOME A PARTNER — SOP EXTERNAL RELATION & PIC CONTACT OVERLAY
+       ========================================================================= -->
+  <div
+    id="partner-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="partner-modal-title"
+  >
+    <!-- Backdrop -->
+    <div
+      class="absolute inset-0 bg-charcoal/65 backdrop-blur-xs"
+      onclick="closePartnerModal()"
+    ></div>
+
+    <!-- Centered Editorial Modal Card -->
+    <div class="relative z-10 w-full max-w-3xl max-h-[90vh] bg-cream rounded-3xl border-2 border-charcoal shadow-2xl flex flex-col overflow-hidden animate-fade-up">
+      <!-- Modal Header -->
+      <div class="px-6 py-5 sm:px-8 hairline-b bg-white/85 flex items-start justify-between gap-4">
+        <div>
+          <span class="inline-block text-[11px] font-extrabold uppercase tracking-[0.16em] text-magenta mb-1.5">
+            EXTERNAL RELATION &bull; COLLABORATION
+          </span>
+          <h3 id="partner-modal-title" class="text-2xl sm:text-3xl font-extrabold tracking-tight text-charcoal">
+            Partnership &amp; Collaboration
+          </h3>
+          <!-- 4 Collaboration Type Pills -->
+          <div id="partner-modal-types" class="mt-3 flex flex-wrap items-center gap-2">
+            <!-- Populated by renderPartnerModalContent() -->
+          </div>
+        </div>
+        <button
+          type="button"
+          onclick="closePartnerModal()"
+          class="p-2.5 rounded-full border border-charcoal/25 text-charcoal hover:bg-magenta hover:text-white hover:border-magenta transition-colors shrink-0"
+          aria-label="Tutup Overlay Partnership"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Scrollable Content -->
+      <div class="p-6 sm:p-8 overflow-y-auto custom-scroll space-y-7">
+        <!-- 1. Benefit Utama -->
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-[0.16em] text-magenta mb-3.5">
+            Benefit Utama Mitra
+          </h4>
+          <div id="partner-modal-benefits" class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            <!-- Populated by renderPartnerModalContent() -->
+          </div>
+        </div>
+
+        <!-- 2. Ringkasan SOP & Syarat Ketentuan -->
+        <div class="p-5 sm:p-6 rounded-2xl bg-white/85 hairline-border">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+            <h4 class="text-xs font-bold uppercase tracking-[0.16em] text-charcoal">
+              Ringkasan SOP &amp; Syarat Ketentuan
+            </h4>
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-yellowbrand/50 text-charcoal">
+              Divisi External Relation
+            </span>
+          </div>
+          <ol id="partner-modal-sop" class="space-y-3">
+            <!-- Populated by renderPartnerModalContent() -->
+          </ol>
+        </div>
+
+        <!-- 3. Kartu Kontak PIC Partnership (External Relation) -->
+        <div class="rounded-2xl bg-charcoal text-cream p-5 sm:p-6 relative overflow-hidden">
+          <div class="ambient-orb-dark-1 absolute -top-16 -right-16 w-56 h-56 rounded-full"></div>
+          <div class="relative z-10 flex flex-col gap-5">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div>
+                <span class="text-[10px] font-extrabold uppercase tracking-[0.16em] text-yellowbrand block mb-1">
+                  KONTAK PIC PARTNERSHIP
+                </span>
+                <h4 id="partner-pic-name" class="text-lg sm:text-xl font-extrabold tracking-tight text-white">
+                  External Relation &mdash; FEBerbisnis
+                </h4>
+                <p id="partner-pic-desc" class="text-xs sm:text-sm text-cream/75 mt-1">
+                  Siap mendiskusikan peluang kolaborasi brand, media partner, dan sponsorship bersama FEBerbisnis.
+                </p>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap items-center gap-3 pt-4 border-t border-cream/15">
+              <a
+                id="partner-wa-link"
+                href="https://wa.me/6281234567890"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-magenta hover:bg-yellowbrand text-white hover:text-charcoal text-xs sm:text-sm font-bold transition-colors duration-200 shadow-swiss"
+              >
+                <span>Chat WhatsApp PIC</span>
+                <span aria-hidden="true">&rarr;</span>
+              </a>
+              <a
+                id="partner-email-link"
+                href="mailto:partnership@feberbisnis.org"
+                class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white/10 hover:bg-white/20 text-cream border border-cream/20 text-xs sm:text-sm font-bold transition-colors duration-200"
+              >
+                <span>Kirim Email</span>
+              </a>
+              <a
+                id="partner-sop-pdf-link"
+                href="assets/docs/SOP-Partnership-FEBerbisnis.pdf"
+                onclick="handleSopDownload(event)"
+                class="inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-full text-yellowbrand hover:text-white text-xs sm:text-sm font-bold underline underline-offset-4 transition-colors duration-200"
+              >
+                <span>Unduh SOP Lengkap (PDF)</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-4 sm:px-8 hairline-t bg-white/60 flex items-center justify-between text-xs text-charcoal/60">
+        <span>Divisi External Relation &bull; FEBerbisnis</span>
+        <button
+          type="button"
+          onclick="closePartnerModal()"
+          class="px-4 py-2 rounded-full bg-charcoal text-cream font-semibold hover:bg-magenta transition-colors"
+        >
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Friendly Non-Blocking Toast Notification (for SOP PDF placeholder feedback) -->
+  <div
+    id="partner-toast"
+    role="status"
+    aria-live="polite"
+    class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] hidden max-w-md w-[92vw] px-5 py-3.5 rounded-2xl bg-charcoal text-cream border border-yellowbrand/50 shadow-2xl text-xs sm:text-sm font-semibold text-center animate-fade-up"
+  >
+    Dokumen SOP Partnership sedang disiapkan di assets/docs/SOP-Partnership-FEBerbisnis.pdf.
+  </div>
+
+  <!-- =========================================================================
+       DEDICATED A4 PRINT / SAVE AS PDF REPORT CONTAINER (VISIBLE ONLY ON PRINT)
+       ========================================================================= -->
+  <div id="simulator-print-report" class="hidden bg-white text-charcoal">
+    <!-- Populated dynamically by buildPrintReportHTML() right before window.print() -->
+  </div>
+
+  <!-- =========================================================================
+       STATIC DATA & APPLICATION LOGIC
+       ========================================================================= -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

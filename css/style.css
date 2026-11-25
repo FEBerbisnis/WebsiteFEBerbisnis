@@ -1,0 +1,336 @@
+/* =========================================================================
+   SWISS EDITORIAL BASE & UTILITIES
+   ========================================================================= */
+:root {
+  --bg-cream: #FEF6EB;
+  --ink-charcoal: #343333;
+  --accent-magenta: #E5006E;
+  --accent-yellow: #FFCE13;
+  --hairline: rgba(52, 51, 51, 0.14);
+  --hairline-dark: rgba(254, 246, 235, 0.16);
+}
+
+body {
+  background-color: var(--bg-cream);
+  color: var(--ink-charcoal);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.hairline-border {
+  border: 1px solid var(--hairline);
+}
+
+.hairline-t {
+  border-top: 1px solid var(--hairline);
+}
+
+.hairline-b {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.hairline-r {
+  border-right: 1px solid var(--hairline);
+}
+
+.hairline-dark-border {
+  border: 1px solid var(--hairline-dark);
+}
+
+/* Subtle Magenta to Yellow Editorial Gradient Text */
+.text-brand-gradient {
+  background: linear-gradient(105deg, #E5006E 0%, #F25C3B 55%, #E8A800 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Ambient Swiss Gradient Orbs */
+.ambient-orb-hero {
+  background: radial-gradient(
+    circle at 30% 35%,
+    rgba(229, 0, 110, 0.16) 0%,
+    rgba(255, 206, 19, 0.22) 48%,
+    rgba(254, 246, 235, 0) 75%
+  );
+  filter: blur(28px);
+  pointer-events: none;
+}
+
+.ambient-orb-dark-1 {
+  background: radial-gradient(
+    circle,
+    rgba(229, 0, 110, 0.24) 0%,
+    rgba(229, 0, 110, 0) 68%
+  );
+  filter: blur(42px);
+  pointer-events: none;
+}
+
+.ambient-orb-dark-2 {
+  background: radial-gradient(
+    circle,
+    rgba(255, 206, 19, 0.18) 0%,
+    rgba(255, 206, 19, 0) 68%
+  );
+  filter: blur(42px);
+  pointer-events: none;
+}
+
+/* Subtle Swiss Architectural Grid Pattern */
+.swiss-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(52, 51, 51, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(52, 51, 51, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* =========================================================================
+   ORGANOGRAM TREE CHART GEOMETRY (COMPACT HORIZONTAL SWISS TREE)
+   ========================================================================= */
+.org-tree-canvas {
+  min-width: 980px;
+  position: relative;
+}
+
+.org-node {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.org-node:hover {
+  transform: translateY(-2px);
+  border-color: rgba(229, 0, 110, 0.55);
+  box-shadow: 0 10px 24px -10px rgba(52, 51, 51, 0.14);
+}
+
+.org-node.is-active {
+  border-color: #E5006E !important;
+  box-shadow: 0 0 0 3px rgba(229, 0, 110, 0.16), 0 14px 28px -10px rgba(229, 0, 110, 0.24);
+}
+
+/* Tier 1.5: General Secretary Side Branch off Main Vertical Spine */
+.tree-gs-row {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  width: 100%;
+  align-items: stretch;
+  position: relative;
+}
+
+.tree-gs-spine {
+  width: 1px;
+  height: 100%;
+  min-height: 184px;
+  background-color: rgba(52, 51, 51, 0.24);
+}
+
+.tree-gs-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 38px 48px 40px 0;
+  position: relative;
+}
+
+.tree-gs-left::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 48px;
+  height: 1px;
+  background-color: rgba(52, 51, 51, 0.20);
+}
+
+/* Unified 5-Column Swiss Organogram Grid (strict equal width & equal height across all 5 divisions) */
+.tree-grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: 16px;
+  width: 100%;
+  position: relative;
+}
+
+.tree-line {
+  background-color: rgba(52, 51, 51, 0.20);
+}
+
+/* Name Overlay Gradient on Full-Card Member Portrait Cards */
+.member-name-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(38, 37, 37, 0.98) 0%,
+    rgba(52, 51, 51, 0.92) 48%,
+    rgba(52, 51, 51, 0.42) 76%,
+    rgba(52, 51, 51, 0) 100%
+  );
+}
+
+/* Custom subtle scrollbar for horizontal tree & modals */
+.custom-scroll::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: rgba(52, 51, 51, 0.06);
+  border-radius: 9999px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(52, 51, 51, 0.24);
+  border-radius: 9999px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(229, 0, 110, 0.65);
+}
+
+/* View fade-in animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* =========================================================================
+   BUSINESS PLAYGROUND: RANGE SLIDERS & PRINT-FRIENDLY PDF STYLES
+   ========================================================================= */
+.swiss-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: rgba(52, 51, 51, 0.14);
+  outline: none;
+}
+
+.swiss-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: #E5006E;
+  border: 2.5px solid #FEF6EB;
+  box-shadow: 0 2px 8px rgba(52, 51, 51, 0.28);
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.swiss-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+  background: #343333;
+}
+
+.swiss-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: #E5006E;
+  border: 2.5px solid #FEF6EB;
+  box-shadow: 0 2px 8px rgba(52, 51, 51, 0.28);
+  cursor: pointer;
+}
+
+/* Help "?" Dropdown Popover */
+.help-popover-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.help-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  border: 1px solid rgba(52, 51, 51, 0.28);
+  background: #FEF6EB;
+  color: #343333;
+  font-size: 11px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.help-btn:hover,
+.help-btn[aria-expanded="true"] {
+  background: #E5006E;
+  border-color: #E5006E;
+  color: #FFFFFF;
+}
+
+/* =========================================================================
+   ECOSYSTEM & PARTNERS SEAMLESS LOGO MARQUEE
+   ========================================================================= */
+@keyframes ecosystemMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ecosystem-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: ecosystemMarquee 28s linear infinite;
+  will-change: transform;
+}
+
+.ecosystem-marquee-viewport:hover .ecosystem-marquee-track {
+  animation-play-state: paused;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  body {
+    background: #FFFFFF !important;
+    color: #343333 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  header,
+  main,
+  footer,
+  #org-overlay-modal,
+  #program-modal,
+  #community-modal,
+  #shop-modal,
+  #partner-modal,
+  #pdf-preview-modal,
+  #partner-toast,
+  .no-print {
+    display: none !important;
+  }
+
+  #simulator-print-report {
+    display: block !important;
+  }
+
+  .print-break-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
